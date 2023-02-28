@@ -1,6 +1,6 @@
 namespace Squire.VM.Runtime.Handlers
 {
-    public class VMInstruction
+    public class Instruction
     {
         public OpCode OpCode { get; set; }
         public VMObject Operand { get; set; }

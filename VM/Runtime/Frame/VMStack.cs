@@ -7,7 +7,7 @@ namespace Squire.VM.Runtime.Frame
         public int Count 
             => Stack.Count;
 
-        public VmStack()
+        public VMStack()
         {
             Stack = new Stack<VMObject>();
         }

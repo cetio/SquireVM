@@ -5,24 +5,13 @@ namespace Squire.VM.Runtime.Frame
         protected object? Value;
 
         public VMObject(object? obj)
-        {
             Value = obj;
-        }
 
         public VMObject(Type type)
-        {
             Value = default(type);
-        }
 
         public unsafe object? ToParameter(ParameterInfo derived)
-        {
-            if (derived.IsOptional && IsType(Type.Missing))
-                return Value;
-            else if (IsType(Type.Missing))
-                throw new ArgumentNullException();
-            else
-                return Convert.ChangeType(Value, derived.ParameterType);
-        }
+            => Convert.ChangeType(Value, derived.ParameterType);
 
         public VMObject GetPointer()
         {
@@ -61,7 +50,7 @@ namespace Squire.VM.Runtime.Frame
             => Value.GetType() == type;
         
         public bool IsVoid
-            => Value == null;
+            => Value == typeof(void);
 
         public bool IsPointer
             => IsNint || IsNUint || Value.GetType().IsPointer;
