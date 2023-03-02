@@ -37,15 +37,6 @@ namespace Squire.VM.Runtime.Frame
             return this;
         }
 
-        public VMObject ChangeType_Un(Type type)
-        {
-            unchecked
-            {
-                Value = Convert.ChangeType(Value, operand);
-                return this;
-            }
-        }
-
         public bool IsType(Type type)
             => Value.GetType() == type;
         

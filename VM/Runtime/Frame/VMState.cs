@@ -23,7 +23,7 @@ namespace Squire.VM.Runtime.Frame
                 Arguments[parameters.Indexof(param)] = (new VMObject(param));
         }
 
-        public VMObject Run()
+        public object? Run()
         {
             bool doCatch = false;
             bool doFinally = false;
@@ -74,7 +74,7 @@ namespace Squire.VM.Runtime.Frame
                 }
 
                 if (instr.OpCode == OpCodes.Ret)
-                    return VMStack.Pop();
+                    return VMStack.Pop().Box();
             }
         }
     }
