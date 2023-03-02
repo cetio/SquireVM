@@ -4,13 +4,13 @@ namespace Squire.VM.Runtime.Handlers.Impl
     {
         public override void Run(Context ctx, VMObject operand)
         {
-            VMObject vobj = ctx.VMStack.Pop();
-            Type type = vobj.Box().GetType();
-            void* source = (void*)vobj.GetPointer()
+            object source = ctx.VMStack.Pop().Box();
             void* dest = (void*)ctx.VMStack.Pop().Unbox();
 
-            Unsafe.InitBlock(dest, 0, Marshal.SizeOf(type));
-            Unsafe.CopyBlock(dest, source, Marshal.SizeOf(type));
+            int size = Marshal.SizeOf(source.GetType());
+
+            Unsafe.InitBlock(dest, 0, size);
+            Unsafe.CopyBlock(dest, source, size);
 
             ctx.Position++;
         }
