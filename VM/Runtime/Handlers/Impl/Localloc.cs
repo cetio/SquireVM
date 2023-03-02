@@ -6,6 +6,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         {
             int len = ctx.VMStack.Pop().Unbox();
             byte[] alloc = new byte[len];
+            
             ctx.VMStack.Push(VMObject.GetPointer(ref alloc[0]));
 
             ctx.Position++;

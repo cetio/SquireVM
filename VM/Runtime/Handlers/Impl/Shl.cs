@@ -6,6 +6,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         {
             VMObject y = ctx.VMStack.Pop();
             VMObject x = ctx.VMStack.Pop();
+            
             ctx.VMStack.Push(x.Unbox() << y.Unbox());
             
             ctx.Position++;

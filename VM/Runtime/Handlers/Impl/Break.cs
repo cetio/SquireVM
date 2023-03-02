@@ -5,6 +5,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         public override void Run(Context ctx, VMObject operand)
         {
             Debugger.Break();
+            
             ctx.Position++;
         }
     }

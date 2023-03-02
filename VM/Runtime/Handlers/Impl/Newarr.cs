@@ -6,6 +6,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         {
             VMObject len = ctx.VMStack.Pop();
             VMObject[] arr = new VMObject[len];
+            
             ctx.VMStack.Push(arr);
             
             ctx.Position++;

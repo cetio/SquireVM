@@ -3,22 +3,20 @@ namespace Squire.VM.Runtime.Frame
     public class VMState
     {
         public VMStack VMStack { get; }
-        public VMExStack VMExStack { get; }
         public VMObject[] Locals { get; }
         public VMObject[] Arguments { get; }
+        public Stack<Exception> ExStack { get; }
 
         public List<Instruction> Instructions { get; set; }
-        public List<ExceptionHandler> ExceptionHandlers { get; set; }
         public int Position { get; set; }
         
         public VMState(object[] parameters)
         {
             VMStack = new VMStack();
-            VMExStack = new VMExStack();
             Locals = new VMObject[50];
             Arguments = new VMObject[parameters.Length];
+            ExStack = new Stack<Exception>();
             Instructions = new List<Instruction>();
-            ExceptionHandlers = new List<ExceptionHandler>();
             Position = 0;
 
             foreach (object param in parameters)
@@ -42,11 +40,9 @@ namespace Squire.VM.Runtime.Frame
                     doFinally = false;
 
                 if (doCatch)
-                    ExceptionHandlers.Add(ExceptionHandlers.Catch);
+                    inst.ExceptionHandler = ExceptionHandler.Catch;
                 else if (doFinally)
-                    ExceptionHandlers.Add(ExceptionHandlers.Finally);
-                else
-                    ExceptionHandlers.Add(ExceptionHandlers.None);
+                    inst.ExceptionHandler = ExceptionHandler.Finally;
             }
 
             while (true)
@@ -55,16 +51,24 @@ namespace Squire.VM.Runtime.Frame
 
                 try
                 {
-                    instr.Run(this);
+                    if (instr.ExceptionHandler == ExceptionHandler.Overflow)
+                    {
+                        unchecked
+                        {
+                            instr.Run(this);
+                        }
+                    }
+                    else
+                    {
+                        instr.Run(this);
+                    }
                 }
                 catch (Exception ex)
                 {
-                    ExceptionHandler exHandler = ExceptionHandlers[Position - 1];
-
-                    if (exHandler == ExceptionHandler.None)
+                    if (inst.ExceptionHandler == ExceptionHandler.None)
                         throw ex;
-                    else if (exHandler == ExceptionHandler.Catch)
-                        VMExStack.Push(ex);
+                    else if (instr.ExceptionHandler == ExceptionHandler.Catch)
+                        ExStack.Push(ex);
                     else
                         throw ex;
                 }

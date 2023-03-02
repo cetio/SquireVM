@@ -4,7 +4,8 @@ namespace Squire.VM.Runtime.Handlers.Impl
     {
         public override void Run(Context ctx, VMObject operand)
         {
-            throw Context.VMExStack.Pop();
+            throw ctx.ExStack.Pop();
+
             ctx.Position++;
         }
     }

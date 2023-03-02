@@ -4,6 +4,7 @@ namespace Squire.VM.Runtime.Handlers
     {
         None = 0,
         Catch = 1,
-        Finally = 2
+        Finally = 2,
+        Overflow = 3
     }
 }

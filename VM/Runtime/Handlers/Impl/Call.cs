@@ -15,7 +15,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
 
                 object? ret = method.Invoke(params.ToArray());
 
-                if (((MethodInfo)method).ReturnType == typeof(voic))
+                if (((MethodInfo)method).ReturnType != typeof(void))
                     ctx.VMStack.Push(ret);
             }
             else
@@ -30,7 +30,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
 
                 object? ret = method.Invoke(target, params.ToArray());
 
-                if (ret != null)
+                if (((MethodInfo)method).ReturnType != typeof(void))
                     ctx.VMStack.Push(ret);
             }
             

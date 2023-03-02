@@ -4,6 +4,14 @@ namespace Squire.VM.Runtime.Handlers
     {
         public OpCode OpCode { get; set; }
         public VMObject Operand { get; set; }
+        public ExceptionHandler ExceptionHandler { get; set; } = ExceptionHandler.None;
+
+        public Instruction(OpCode opCode, VMObject operand, ExceptionHandler exhandler)
+        {
+            OpCode = opCode;
+            Operand = operand;
+            ExceptionHandler = exhandler;
+        }
 
         public Instruction(OpCode opCode, VMObject operand)
         {

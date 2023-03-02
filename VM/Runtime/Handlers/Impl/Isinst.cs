@@ -6,6 +6,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         {
             int mdtoken = operand.Unbox();
             Type type = TokenHelper.ForceResolveType(mdtoken);
+            
             ctx.VMStack.Push(operand.IsType(type));
 
             ctx.Position++;

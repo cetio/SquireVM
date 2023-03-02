@@ -6,6 +6,7 @@ namespace Squire.VM.Runtime.Handlers.Impl
         {
             int index = operand.IsVoid ? ctx.VMStack.Pop().Unbox() : operand.Unbox();
             Array arr = ctx.VMStack.Pop().Unbox();
+            
             ctx.VMStack.Push(VMObject.GetPointer(ref arr.GetValue(index)));
 
             ctx.Position++;
