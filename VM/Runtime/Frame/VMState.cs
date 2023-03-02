@@ -53,14 +53,17 @@ namespace Squire.VM.Runtime.Frame
                 {
                     if (instr.ExceptionHandler == ExceptionHandler.Overflow)
                     {
-                        unchecked
+                        checked
                         {
                             instr.Run(this);
                         }
                     }
                     else
                     {
-                        instr.Run(this);
+                        unchecked
+                        {
+                            instr.Run(this);
+                        }
                     }
                 }
                 catch (Exception ex)

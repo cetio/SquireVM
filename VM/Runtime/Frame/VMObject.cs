@@ -16,13 +16,13 @@ namespace Squire.VM.Runtime.Frame
         public VMObject GetPointer()
         {
             GCHandle handle = GCHandle.Alloc(Value, GCHandleType.Pinned);
-            return new VMObject((nuint)Unsafe.AsPointer(ref obj));
+            return new VMObject((nint)Unsafe.AsPointer(ref obj));
         }
 
         public static VMObject GetPointer(ref object? obj)
         {
             GCHandle handle = GCHandle.Alloc(obj, GCHandleType.Pinned);
-            return new VMObject((nuint)Unsafe.AsPointer(ref obj));
+            return new VMObject((nint)Unsafe.AsPointer(ref obj));
         }
 
         public dynamic Unbox()
@@ -44,7 +44,7 @@ namespace Squire.VM.Runtime.Frame
             => Value == typeof(void);
 
         public bool IsPointer
-            => IsNint || IsNUint || Value.GetType().IsPointer;
+            => IsNint || Value.GetType().IsPointer;
 
         public bool IsNint
             => IsType(typeof(nuint));

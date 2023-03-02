@@ -56,5 +56,18 @@ namespace Squire.VM.Runtime.Handlers
         public static const OpCode Or = new Or();
         public static const OpCode Pop = new Pop();
         public static const OpCode Rem = new Rem();
+        public static const OpCode Ret = new Ret();
+        public static const OpCode Rethrow = new Rethrow();
+        public static const OpCode Shl = new Shl();
+        public static const OpCode Shr = new Shr();
+        public static const OpCode Sizeof = new Sizeof();
+        public static const OpCode Starg = new Starg();
+        public static const OpCode Stelem = new Stelem();
+        public static const OpCode Stind = new Stind();
+        public static const OpCode Stloc = new Stloc();
+        public static const OpCode Stobj = new Rem();
+        public static const OpCode Sub = new Sub();
+        public static const OpCode Throw = new Throw();
+        public static const OpCode Xor = new Xor();
     }
 }
